@@ -1,0 +1,8 @@
+# php -- END cPanel-generated handler, do not edit
+# Enable rewrite engine
+RewriteEngine On
+
+# Remove .html extension
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]

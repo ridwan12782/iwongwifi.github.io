@@ -1,0 +1,432 @@
+/* Header Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto; /* Menambahkan overflow-y untuk mengizinkan guliran vertikal */
+    background-color: #f5f5f5;
+    color: #333; /* Warna teks default konten */
+}
+header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.info-bar {
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px; /* Mengurangi margin-top menjadi 20px */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    order: -1; /* Pindahkan logo ke kiri */
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 10px; /* Tambahkan margin antara logo dan judul */
+}
+
+.site-title {
+    font-size: 24px;
+    margin-left: 10px; /* Beri margin ke kiri */
+    font-weight: bold;
+}
+
+/* Sidebar Navigation */
+nav#sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    z-index: 1;
+}
+
+nav#sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #fff;
+    display: block;
+    transition: 0.3s;
+}
+
+nav#sidebar a:hover {
+    background-color: #555;
+}
+
+nav#sidebar .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 36px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Main Content Container */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+h2 {
+    text-align: center;
+    color: #007bff;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #000; /* Ubah warna teks konten menjadi hitam */
+}
+
+ol {
+    margin: 20px 0;
+    padding-left: 20px;
+}
+
+ol li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #000; /* Ubah warna teks konten menjadi hitam */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Unlimited Package Styles */
+.unlimited {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.unlimited h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.unlimited p {
+    margin-bottom: 0;
+}
+
+/* FAQ Section */
+.faq {
+    width: 100%;
+}
+
+.question {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.question h3 {
+    color: #007bff;
+    margin-top: 0;
+}
+
+.question p {
+    margin-bottom: 0;
+    color: #000; /* Ubah warna teks konten menjadi hitam */
+}
+
+/* Testimonials Styles */
+.testimonials {
+    background: #fff;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial {
+    margin-bottom: 1rem;
+}
+
+.testimonial span {
+    display: block;
+    margin-top: 0.5rem;
+    color: #555;
+    font-style: italic;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image */
+#caption {
+    margin: auto;
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption { 
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #f7f2f2;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Download link styling */
+.download-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.download-link a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #007bff;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.download-link a:hover {
+    background-color: #0056b3;
+}
+
+/* Package Section */
+.packages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.package {
+    background: #fff;
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    flex: 1 1 30%;
+    max-width: 30%;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.package:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.package i {
+    font-size: 2.5rem;
+    color: #0066cc;
+}
+
+.package h3 {
+    margin-top: 0.5rem;
+    color: #0066cc;
+}
+
+.info-bar {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    text-align: center;
+}
+
+.info-bar p {
+    margin: 10px 0;
+    color: #fff; /* Ensure text is white */
+}
+
+.info-bar a {
+    color: #ff0;
+    text-decoration: underline;
+}
+
+.info-bar .social-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-bar .social-link {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 24px;
+    transition: color 0.3s;
+}
+
+.info-bar .social-link:hover {
+    color: #ff0;
+}
+
+/* Additional Info Section */
+.additional-info {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.additional-info h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.additional-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.additional-info ul li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.additional-info ul li i {
+    margin-right: 10px;
+    color: #007bff;
+}
+
+
+/* Ensure Responsiveness */
+@media only screen and (min-width: 769px) {
+    .menu-btn {
+        display: none; /* Hide menu button on larger screens */
+    }
+
+    /* Sidebar Navigation */
+    nav#sidebar {
+        width: 250px;
+    }
+
+    .container {
+        padding: 2rem 3rem; /* Increase padding for larger screens */
+    }
+
+    /* Header Styles */
+    header {
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .info-bar {
+        padding: 20px 40px; /* Increase padding for larger screens */
+    }
+    .logo-container, .info-bar .social-media {
+        margin-bottom: 10px;
+    }
+
+    .site-title {
+        font-size: 20px;
+    }
+
+    .info-bar p, .info-bar .social-media {
+        text-align: center;
+        width: 100%;
+        color: #fff;
+    }
+
+    .info-bar .social-media {
+        justify-content: center;
+    }
+}
