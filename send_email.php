@@ -17,13 +17,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Host       = 'smtp.gmail.com'; // Ubah ke alamat server SMTP Anda
             $mail->SMTPAuth   = true;
             $mail->Username   = 'ridwanspeed8@gmail.com'; // Ubah ke alamat email Anda
-            $mail->Password   = 'ndgq dhzs ytsn itxq'; // Ubah ke kata sandi email Anda
+            $mail->Password   = 'etxx nwrc ulwp zdlx'; // Ubah ke kata sandi email Anda
             $mail->SMTPSecure = 'ssl'; // Jika menggunakan SSL, ubah menjadi 'ssl'
             $mail->Port       = 465; // Port SMTP, sesuaikan jika perlu
 
             // Email pengirim
             $mail->setFrom('ridwanspeed8@gmail.com', 'Ridwan'); // Ubah ke alamat email Anda dan nama pengirim
-            $mail->addAddress('cs@iwingwifi.biz.id', 'cs Iwonks WiFi'); // Ubah ke alamat email dan nama penerima
+            $mail->addAddress('cs.iwongwifi@iwongwifi.biz.id', 'cs Iwonks WiFi'); // Ubah ke alamat email dan nama penerima
 
             // Konten
             $mail->isHTML(true); // Set email sebagai format HTML
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container">
         <h2>Kontak I Net</h2>
         <div class="message">
-            <p>Selamat datang di halaman kontak I Net. Kami siap membantu Anda dengan layanan internet kami yang handal dan stabil. Jangan ragu untuk menghubungi kami melalui alamat email <a href="mailto:info@rtrwnet.com">cs@iwongwifi.biz.id</a> untuk pertanyaan atau bantuan terkait layanan kami.</p>
+            <p>Selamat datang di halaman kontak I Net. Kami siap membantu Anda dengan layanan internet kami yang handal dan stabil. Jangan ragu untuk menghubungi kami melalui alamat email <a href="mailto:info@rtrwnet.com">cs.iwongwifi@iwongwifi.biz.id</a> untuk pertanyaan atau bantuan terkait layanan kami.</p>
             <p>Jika Anda memiliki pertanyaan lebih lanjut mengenai paket layanan atau mengalami masalah teknis, kunjungi juga halaman <a href="faq.html">FAQ</a> kami untuk informasi yang mungkin dapat membantu.</p>
             <p>Kami berkomitmen untuk memberikan pengalaman internet yang optimal bagi pelanggan kami. Terima kasih telah memilih I Net sebagai penyedia layanan internet Anda.</p>
         </div>
