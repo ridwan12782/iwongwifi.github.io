@@ -1,8 +1,10 @@
-# php -- END cPanel-generated handler, do not edit
-# Enable rewrite engine
-RewriteEngine On
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_METHOD} POST
+    RewriteRule ^kontak\.php$ - [L]
+</IfModule>
 
-# Remove .html extension
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.html -f
-RewriteRule ^(.*)$ $1.html [NC,L]
+<IfModule mod_security.c>
+    SecFilterEngine Off
+    SecFilterScanPOST Off
+</IfModule>
