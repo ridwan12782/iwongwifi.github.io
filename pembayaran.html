@@ -3,10 +3,14 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pembayaran - I Net</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pembayaran - I Net</title>
+        <link rel="stylesheet" href="assets/css/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <!-- Font Awesome Icons -->
+        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             if (sessionStorage.getItem("auth") !== "granted") {
@@ -95,30 +99,19 @@
         }
 
         /* Ensure Responsiveness */
-@media only screen and (min-width: 769px) {
-    .menu-btn {
-        display: none; /* Hide menu button on larger screens */
-    }
-
-    /* Sidebar Navigation */
-    nav#sidebar {
-        width: 250px;
-    }
-
+        @media only screen and (max-width: 768px) {
     .container {
-        padding: 2rem 3rem; /* Increase padding for larger screens */
+        width: 95%;
     }
 
-    /* Header Styles */
-    header {
-        padding: 10px 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    .menu-btn {
+        display: block;
     }
-    .info-bar {
-        padding: 20px 40px; /* Increase padding for larger screens */
+
+    nav#sidebar {
+        width: 0;
     }
+}
 
     </style>
 </head>
