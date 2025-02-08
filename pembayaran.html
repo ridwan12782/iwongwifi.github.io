@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pembayaran - I Net</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (sessionStorage.getItem("auth") !== "granted") {
+                window.location.href = "kunci.html"; // Cek apakah user sudah login
+            }
+        });
+    </script>
 </head>
 <body>
+    <!-- Header -->
     <header id="header">
         <div class="logo-container">
             <a href="#" class="logo" id="logo">
@@ -29,6 +33,7 @@
         </nav>
     </header>
 
+    <!-- Konten Utama -->
     <div class="container">
         <h2>Pembayaran Bulanan</h2>
         <div class="form-container">
@@ -54,6 +59,19 @@
         </table>
     </div>
 
+    <!-- Footer -->
+    <div class="info-bar">
+        <p>Untuk informasi lebih lanjut, hubungi kami di <a href="mailto:cs.iwongwifi@iwongwifi.biz.id">cs.iwongwifi@iwongwifi.biz.id</a> atau kunjungi halaman <a href="faq.html">FAQ</a>.</p>
+        <div class="social-media">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/message/Q4DHULLRYIW6N1" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/xwaaan__?igsh=eHY1ZnR0dWtpZTNq" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 I Net. All rights reserved.</p>
+    </div>
+
+    <!-- Script -->
+    <script src="assets/js/index.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             loadCustomers();
@@ -144,30 +162,16 @@
                 saveCustomers();
             }
         }
-    </script>
-    <div class="info-bar">
-        <p>Untuk informasi lebih lanjut, hubungi kami di <a href="mailto:cs.iwongwifi@iwongwifi.biz.id">cs.iwongwifi@iwongwifi.biz.id</a> atau kunjungi halaman <a href="faq.html">FAQ</a>.</p>
-        <div class="social-media">
-            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://wa.me/message/Q4DHULLRYIW6N1" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.instagram.com/xwaaan__?igsh=eHY1ZnR0dWtpZTNq" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p>&copy; 2024 I Net. All rights reserved.</p>
-    </div>
-    
-    <script src="assets/js/index.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            if (sessionStorage.getItem("auth") !== "granted") {
-                window.location.href = "kunci.html"; // Arahkan ke halaman kunci jika belum ada akses
-            }
+
+        // Sidebar Toggle
+        document.getElementById("menu-btn").addEventListener("click", function () {
+            document.getElementById("sidebar").style.width = "250px";
+        });
+
+        document.getElementById("close-btn").addEventListener("click", function () {
+            document.getElementById("sidebar").style.width = "0";
         });
     </script>
-    <script>
-    document.querySelector("a[href='pembayaran.html']").addEventListener("click", function () {
-        sessionStorage.removeItem("auth"); // Hapus akses agar kunci diminta lagi
-    });
-</script>
-    
+    <script src="assets/js/index.js"></script>
 </body>
 </html>
