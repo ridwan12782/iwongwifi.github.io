@@ -10,99 +10,6 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 800px;
-            margin: 20px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
-            color: #007bff;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .form-container input {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        button {
-            margin-top: 10px;
-            padding: 10px 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 5px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .edit-btn {
-            background-color: #ffc107;
-        }
-
-        .delete-btn {
-            background-color: #dc3545;
-        }
-
-        .save-status-btn {
-            background-color: #28a745;
-        }
-
-        /* Responsiveness */
-        @media (max-width: 600px) {
-            table, th, td {
-                font-size: 12px;
-            }
-            .container {
-                width: 95%;
-            }
-            button {
-                font-size: 12px;
-                padding: 8px;
-            }
-        }
-    </style>
 </head>
 <body>
     <header id="header">
@@ -257,10 +164,10 @@
         });
     </script>
     <script>
-        document.querySelector("a[href='pembayaran.html']").addEventListener("click", function () {
-            sessionStorage.removeItem("auth"); // Hapus akses agar kunci diminta lagi
-        });
-    </script>
-        
+    document.querySelector("a[href='pembayaran.html']").addEventListener("click", function () {
+        sessionStorage.removeItem("auth"); // Hapus akses agar kunci diminta lagi
+    });
+</script>
+    
 </body>
 </html>
