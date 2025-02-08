@@ -118,7 +118,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             // Jika user sudah login, langsung ke halaman pembayaran
             if (sessionStorage.getItem("auth") === "granted") {
-                window.location.href = "pembayaran.html";
+                window.location.href = "menu_pembayaran.html";
             }
         });
     
@@ -128,7 +128,7 @@
     
             if (key === correctKey) {
                 sessionStorage.setItem("auth", "granted"); // Simpan di sessionStorage agar akses hilang saat browser ditutup
-                window.location.href = "pembayaran.html"; // Arahkan ke halaman pembayaran
+                window.location.href = "menu_pembayaran.html"; // Arahkan ke halaman pembayaran
             } else {
                 document.getElementById("errorMessage").textContent = "Kunci salah!";
             }

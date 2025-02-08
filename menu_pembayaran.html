@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran - I Net</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        .form-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+        .form-container input, .form-container button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .action-buttons button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .action-buttons button:hover {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="logo-container">
+            <a href="#" class="logo" id="logo">
+                <img src="assets/images/logo.png" alt="Logo I Net">
+            </a>
+            <span class="site-title">I Net</span>
+        </div>        
+        <nav id="sidebar">
+            <a href="javascript:void(0)" id="close-btn" class="close-btn">×</a>
+            <a href="index.html">Beranda</a>
+            <a href="paket_layanan.html">Paket Layanan</a>
+            <a href="faq.html">FAQ</a>
+            <a href="kontak.html">Kontak</a>
+            <a href="pembayaran.html">Pembayaran</a>
+        </nav>
+    </header>
+
+    <!-- Konten Utama -->
+    <section class="container">
+        <h2>Pembayaran Bulanan</h2>
+        <div class="form-container">
+            <h3>Tambah Customer</h3>
+            <input type="text" id="customerName" placeholder="Nama Customer">
+            <input type="date" id="paymentDate">
+            <input type="text" id="paymentAmount" placeholder="Nominal" oninput="formatCurrency()">
+            <button onclick="addCustomer()">Simpan</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Tanggal</th>
+                    <th>Nominal</th>
+                    <th>Sudah/Belum</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="paymentTable">
+            </tbody>
+        </table>
+    </section>
+
+     <!-- Script -->
+     <script src="assets/js/index.js"></script>
+     <script>
+         document.addEventListener("DOMContentLoaded", function () {
+             loadCustomers();
+         });
+ 
+         function formatCurrency() {
+             let input = document.getElementById("paymentAmount");
+             let value = input.value.replace(/[^0-9]/g, "");
+             if (value) {
+                 input.value = "Rp. " + parseInt(value).toLocaleString("id-ID");
+             }
+         }
+ 
+         function addCustomer() {
+             const name = document.getElementById("customerName").value;
+             const date = document.getElementById("paymentDate").value;
+             let amount = document.getElementById("paymentAmount").value;
+ 
+             if (!name || !amount) {
+                 alert("Nama dan nominal harus diisi!");
+                 return;
+             }
+ 
+             const table = document.getElementById("paymentTable");
+             const row = table.insertRow();
+             row.innerHTML = `
+                 <td>${name}</td>
+                 <td>${date ? date : "-"}</td>
+                 <td>${amount}</td>
+                 <td><input type='checkbox' class='payment-status' onclick="saveCustomers()"></td>
+                 <td>
+                     <button class="edit-btn" onclick="editCustomer(this)">Edit</button>
+                     <button class="delete-btn" onclick="deleteCustomer(this)">Hapus</button>
+                 </td>
+             `;
+ 
+             saveCustomers();
+         }
+ 
+         function saveCustomers() {
+             const tableRows = document.querySelectorAll("#paymentTable tr");
+             let customers = [];
+             tableRows.forEach(row => {
+                 const cols = row.children;
+                 customers.push({
+                     name: cols[0].innerText,
+                     date: cols[1].innerText,
+                     amount: cols[2].innerText,
+                     paid: cols[3].children[0].checked
+                 });
+             });
+             localStorage.setItem("customers", JSON.stringify(customers));
+         }
+ 
+         function loadCustomers() {
+             const customers = JSON.parse(localStorage.getItem("customers")) || [];
+             const table = document.getElementById("paymentTable");
+             customers.forEach(customer => {
+                 const row = table.insertRow();
+                 row.innerHTML = `
+                     <td>${customer.name}</td>
+                     <td>${customer.date}</td>
+                     <td>${customer.amount}</td>
+                     <td><input type='checkbox' class='payment-status' ${customer.paid ? 'checked' : ''} onclick="saveCustomers()"></td>
+                     <td>
+                         <button class="edit-btn" onclick="editCustomer(this)">Edit</button>
+                         <button class="delete-btn" onclick="deleteCustomer(this)">Hapus</button>
+                     </td>
+                 `;
+             });
+         }
+ 
+         function deleteCustomer(button) {
+             button.parentElement.parentElement.remove();
+             saveCustomers();
+         }
+ 
+         function editCustomer(button) {
+             let row = button.parentElement.parentElement;
+             let name = prompt("Edit Nama Customer", row.cells[0].innerText);
+             let date = prompt("Edit Tanggal", row.cells[1].innerText);
+             let amount = prompt("Edit Nominal", row.cells[2].innerText);
+ 
+             if (name && amount) {
+                 row.cells[0].innerText = name;
+                 row.cells[1].innerText = date;
+                 row.cells[2].innerText = amount;
+                 saveCustomers();
+             }
+         }
+
+     </script>
+    
+    <div class="info-bar">
+        <p>Untuk informasi lebih lanjut, hubungi kami di <a href="mailto:cs.iwongwifi@iwongwifi.biz.id">cs.iwongwifi@iwongwifi.biz.id</a> atau kunjungi halaman <a href="faq.html">FAQ</a>.</p>
+        <div class="social-media">
+            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/message/Q4DHULLRYIW6N1" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/xwaaan__?igsh=eHY1ZnR0dWtpZTNq" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 I Net. All rights reserved.</p>
+    </div>
+    
+    <script src="assets/js/index.js"></script>
+</body>
+</html>
