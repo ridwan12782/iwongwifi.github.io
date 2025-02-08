@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,88 @@
             }
         });
     </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #007bff;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .form-container input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .edit-btn {
+            background-color: #ffc107;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+        }
+
+        .save-status-btn {
+            background-color: #28a745;
+        }
+    </style>
 </head>
+
 <body>
     <!-- Header -->
     <header id="header">
@@ -22,7 +104,7 @@
                 <img src="assets/images/logo.png" alt="Logo I Net">
             </a>
             <span class="site-title">I Net</span>
-        </div>        
+        </div>
         <nav id="sidebar">
             <a href="javascript:void(0)" id="close-btn" class="close-btn">×</a>
             <a href="index.html">Beranda</a>
@@ -61,11 +143,14 @@
 
     <!-- Footer -->
     <div class="info-bar">
-        <p>Untuk informasi lebih lanjut, hubungi kami di <a href="mailto:cs.iwongwifi@iwongwifi.biz.id">cs.iwongwifi@iwongwifi.biz.id</a> atau kunjungi halaman <a href="faq.html">FAQ</a>.</p>
+        <p>Untuk informasi lebih lanjut, hubungi kami di <a
+                href="mailto:cs.iwongwifi@iwongwifi.biz.id">cs.iwongwifi@iwongwifi.biz.id</a> atau kunjungi halaman <a
+                href="faq.html">FAQ</a>.</p>
         <div class="social-media">
             <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://wa.me/message/Q4DHULLRYIW6N1" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.instagram.com/xwaaan__?igsh=eHY1ZnR0dWtpZTNq" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/xwaaan__?igsh=eHY1ZnR0dWtpZTNq" target="_blank"><i
+                    class="fab fa-instagram"></i></a>
         </div>
         <p>&copy; 2024 I Net. All rights reserved.</p>
     </div>
@@ -174,4 +259,5 @@
     </script>
     <script src="assets/js/index.js"></script>
 </body>
+
 </html>
