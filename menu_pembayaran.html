@@ -105,6 +105,7 @@
         }
     </style>
     <script>
+        // Verifikasi akses
         document.addEventListener("DOMContentLoaded", function () {
             if (sessionStorage.getItem("auth") !== "granted") {
                 alert("Silakan masukkan kunci akses terlebih dahulu.");
@@ -112,12 +113,104 @@
             } else {
                 document.querySelector(".container").style.display = "block";
             }
+
+            // Memuat data dari localStorage saat halaman dimuat
+            loadData();
         });
+
         window.addEventListener("beforeunload", function () {
             sessionStorage.removeItem("auth");
         });
 
+        // Fungsi format mata uang
+        function formatCurrency() {
+            const input = document.getElementById('paymentAmount');
+            let value = input.value.replace(/[^0-9]/g, ''); // Hapus karakter non-numerik
+            if (value) {
+                input.value = new Intl.NumberFormat('id-ID').format(value);
+            }
+        }
 
+        // Ambil data dari localStorage atau inisialisasi dengan array kosong
+        let paymentData = JSON.parse(localStorage.getItem('payments')) || [];
+
+        // Fungsi untuk menyimpan data customer
+        function addCustomer() {
+            const customerName = document.getElementById('customerName').value;
+            const paymentDate = document.getElementById('paymentDate').value;
+            const paymentAmount = document.getElementById('paymentAmount').value.replace(/[^\d]/g, ''); // Hapus format jika ada
+
+            if (!customerName || !paymentDate || !paymentAmount) {
+                alert("Semua field harus diisi!");
+                return;
+            }
+
+            // Menyimpan data ke dalam array
+            paymentData.push({
+                customerName,
+                paymentDate,
+                paymentAmount: parseInt(paymentAmount),
+                status: 'Belum'  // Set status default 'Belum'
+            });
+
+            // Menyimpan data ke localStorage
+            localStorage.setItem('payments', JSON.stringify(paymentData));
+
+            // Menampilkan data ke dalam tabel
+            displayPayments();
+
+            // Reset form
+            document.getElementById('customerName').value = '';
+            document.getElementById('paymentDate').value = '';
+            document.getElementById('paymentAmount').value = '';
+        }
+
+        // Menampilkan data pembayaran ke tabel
+        function displayPayments() {
+            const tableBody = document.getElementById('paymentTable');
+            tableBody.innerHTML = ''; // Clear tabel sebelum menambahkan data baru
+
+            paymentData.forEach((data, index) => {
+                const dateFormatted = new Date(data.paymentDate).toLocaleDateString('id-ID'); // Format tanggal
+
+                row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${data.customerName}</td>
+                    <td>${dateFormatted}</td>
+                    <td>Rp ${new Intl.NumberFormat('id-ID').format(data.paymentAmount)}</td>
+                    <td>
+                        <select onchange="updateStatus(${index}, this)">
+                            <option value="Belum" ${data.status === 'Belum' ? 'selected' : ''}>Belum</option>
+                            <option value="Sudah" ${data.status === 'Sudah' ? 'selected' : ''}>Sudah</option>
+                        </select>
+                    </td>
+                    <td class="action-buttons">
+                        <button onclick="deletePayment(${index})">Hapus</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Fungsi untuk mengupdate status pembayaran
+        function updateStatus(index, selectElement) {
+            paymentData[index].status = selectElement.value;
+            // Simpan perubahan ke localStorage
+            localStorage.setItem('payments', JSON.stringify(paymentData));
+        }
+
+        // Fungsi untuk menghapus data pelanggan
+        function deletePayment(index) {
+            paymentData.splice(index, 1); // Hapus data dari array
+            // Simpan perubahan ke localStorage
+            localStorage.setItem('payments', JSON.stringify(paymentData));
+            displayPayments(); // Perbarui tampilan tabel
+        }
+
+        // Memuat data dari localStorage saat halaman dimuat
+        function loadData() {
+            displayPayments();
+        }
     </script>
 </head>
 
@@ -157,7 +250,7 @@
                         <th>Customer</th>
                         <th>Tanggal</th>
                         <th>Nominal</th>
-                        <th>Sudah/Belum</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -166,6 +259,7 @@
             </table>
         </div>
     </section>
+
     <div class="info-bar">
         <p>Untuk informasi lebih lanjut, hubungi kami di <a href="mailto:cs.iwongwifi@iwongwifi.biz.id">cs.iwongwifi@iwongwifi.biz.id</a> atau kunjungi halaman <a href="faq.html">FAQ</a>.</p>
         <div class="social-media">
@@ -175,6 +269,7 @@
         </div>
         <p>&copy; 2024 I Net. All rights reserved.</p>
     </div>
+
     <script src="assets/js/index.js"></script>
 </body>
 
