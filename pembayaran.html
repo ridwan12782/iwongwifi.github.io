@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran Bulanan</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .info-bar {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .form-container {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-container input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pembayaran Bulanan</h2>
+        <div class="form-container">
+            <h3>Tambah Customer</h3>
+            <input type="text" id="customerName" placeholder="Nama Customer">
+            <input type="date" id="paymentDate">
+            <input type="text" id="paymentAmount" placeholder="Nominal" oninput="formatCurrency()">
+            <button onclick="addCustomer()">Tambah</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Costumer</th>
+                    <th>Tanggal</th>
+                    <th>Nominal</th>
+                    <th>Sudah/Belum</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody id="paymentTable">
+            </tbody>
+        </table>
+    </div>
+    <div class="info-bar">
+        <p>Untuk informasi lebih lanjut, hubungi kami di <a href="mailto:cs.iwongwifi@iwongwifi.biz.id">cs.iwongwifi@iwongwifi.biz.id</a> atau kunjungi halaman <a href="faq.html">FAQ</a>.</p>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            loadCustomers();
+        });
+        
+        function formatCurrency() {
+            let input = document.getElementById("paymentAmount");
+            let value = input.value.replace(/[^0-9]/g, "");
+            if (value) {
+                input.value = "Rp. " + parseInt(value).toLocaleString("id-ID");
+            }
+        }
+        
+        function addCustomer() {
+            const name = document.getElementById("customerName").value;
+            const date = document.getElementById("paymentDate").value;
+            let amount = document.getElementById("paymentAmount").value;
+            
+            if (!name || !amount) {
+                alert("Nama dan nominal harus diisi!");
+                return;
+            }
+            
+            const table = document.getElementById("paymentTable");
+            const row = table.insertRow();
+            row.innerHTML = `<td>${name}</td><td>${date}</td><td>${amount}</td>
+                <td><input type='checkbox' class='payment-status'></td>
+                <td><button onclick='editCustomer(this)'>Edit</button>
+                    <button onclick='deleteCustomer(this)'>Hapus</button></td>`;
+            saveCustomers();
+        }
+        
+        function saveCustomers() {
+            const tableRows = document.querySelectorAll("#paymentTable tr");
+            let customers = [];
+            tableRows.forEach(row => {
+                const cols = row.children;
+                customers.push({
+                    name: cols[0].innerText,
+                    date: cols[1].innerText,
+                    amount: cols[2].innerText,
+                    paid: cols[3].children[0].checked
+                });
+            });
+            localStorage.setItem("customers", JSON.stringify(customers));
+        }
+        
+        function loadCustomers() {
+            const customers = JSON.parse(localStorage.getItem("customers")) || [];
+            const table = document.getElementById("paymentTable");
+            customers.forEach(customer => {
+                const row = table.insertRow();
+                row.innerHTML = `<td>${customer.name}</td><td>${customer.date}</td><td>${customer.amount}</td>
+                    <td><input type='checkbox' class='payment-status' ${customer.paid ? 'checked' : ''}></td>
+                    <td><button onclick='editCustomer(this)'>Edit</button>
+                        <button onclick='deleteCustomer(this)'>Hapus</button></td>`;
+            });
+        }
+        
+        function deleteCustomer(button) {
+            button.parentElement.parentElement.remove();
+            saveCustomers();
+        }
+        
+        function editCustomer(button) {
+            let row = button.parentElement.parentElement;
+            let name = prompt("Edit Nama Customer", row.cells[0].innerText);
+            let date = prompt("Edit Tanggal", row.cells[1].innerText);
+            let amount = prompt("Edit Nominal", row.cells[2].innerText);
+            
+            if (name && amount) {
+                row.cells[0].innerText = name;
+                row.cells[1].innerText = date;
+                row.cells[2].innerText = amount;
+                saveCustomers();
+            }
+        }
+    </script>
+</body>
+</html>
