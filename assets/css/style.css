@@ -48,17 +48,18 @@ header {
 /* Sidebar Navigation */
 nav#sidebar {
     height: 100%;
-    width: 0;
+    width: 0; /* Awalnya disembunyikan */
     position: fixed;
     top: 0;
     left: 0;
     background-color: #333;
     overflow-x: hidden;
-    transition: 0.5s;
+    transition: 0.5s; /* Efek transisi smooth */
     padding-top: 60px;
-    z-index: 1;
+    z-index: 1000;
 }
 
+/* Link dalam sidebar */
 nav#sidebar a {
     padding: 10px 15px;
     text-decoration: none;
@@ -72,6 +73,7 @@ nav#sidebar a:hover {
     background-color: #555;
 }
 
+/* Tombol close (X) */
 nav#sidebar .close-btn {
     position: absolute;
     top: 10px;
@@ -81,6 +83,7 @@ nav#sidebar .close-btn {
     text-decoration: none;
     cursor: pointer;
 }
+
 
 /* Main Content Container */
 .container {

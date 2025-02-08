@@ -3,15 +3,23 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Daftar Harga - I Net</title>
+        <title>Pembayaran - I Net</title>
         <link rel="stylesheet" href="assets/css/styles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <!-- Font Awesome Icons -->
         <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
         <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
-        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                if (sessionStorage.getItem("auth") !== "granted") {
+                    window.location.href = "kunci.html"; // Arahkan ke halaman kunci jika belum ada akses
+                }
+            });
+        </script>
+        
+        
     </head>
-<body>
+<body onload="checkAccess()">
     <header id="header">
         <div class="logo-container">
             <a href="#" class="logo" id="logo">
@@ -99,8 +107,6 @@
             border-radius: 5px;
         }
     </style>
-</head>
-<body>
     <div class="container">
         <h2>Pembayaran Bulanan</h2>
         <div class="form-container">
@@ -127,84 +133,16 @@
     <div class="info-bar">
         <p>Untuk informasi lebih lanjut, hubungi kami di <a href="mailto:cs.iwongwifi@iwongwifi.biz.id">cs.iwongwifi@iwongwifi.biz.id</a> atau kunjungi halaman <a href="faq.html">FAQ</a>.</p>
     </div>
+    <script src="assets/js/index.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            loadCustomers();
+            if (sessionStorage.getItem("auth") !== "granted") {
+                window.location.href = "kunci.html"; // Arahkan ke halaman kunci jika belum ada akses
+            }
         });
-        
-        function formatCurrency() {
-            let input = document.getElementById("paymentAmount");
-            let value = input.value.replace(/[^0-9]/g, "");
-            if (value) {
-                input.value = "Rp. " + parseInt(value).toLocaleString("id-ID");
-            }
-        }
-        
-        function addCustomer() {
-            const name = document.getElementById("customerName").value;
-            const date = document.getElementById("paymentDate").value;
-            let amount = document.getElementById("paymentAmount").value;
-            
-            if (!name || !amount) {
-                alert("Nama dan nominal harus diisi!");
-                return;
-            }
-            
-            const table = document.getElementById("paymentTable");
-            const row = table.insertRow();
-            row.innerHTML = `<td>${name}</td><td>${date}</td><td>${amount}</td>
-                <td><input type='checkbox' class='payment-status'></td>
-                <td><button onclick='editCustomer(this)'>Edit</button>
-                    <button onclick='deleteCustomer(this)'>Hapus</button></td>`;
-            saveCustomers();
-        }
-        
-        function saveCustomers() {
-            const tableRows = document.querySelectorAll("#paymentTable tr");
-            let customers = [];
-            tableRows.forEach(row => {
-                const cols = row.children;
-                customers.push({
-                    name: cols[0].innerText,
-                    date: cols[1].innerText,
-                    amount: cols[2].innerText,
-                    paid: cols[3].children[0].checked
-                });
-            });
-            localStorage.setItem("customers", JSON.stringify(customers));
-        }
-        
-        function loadCustomers() {
-            const customers = JSON.parse(localStorage.getItem("customers")) || [];
-            const table = document.getElementById("paymentTable");
-            customers.forEach(customer => {
-                const row = table.insertRow();
-                row.innerHTML = `<td>${customer.name}</td><td>${customer.date}</td><td>${customer.amount}</td>
-                    <td><input type='checkbox' class='payment-status' ${customer.paid ? 'checked' : ''}></td>
-                    <td><button onclick='editCustomer(this)'>Edit</button>
-                        <button onclick='deleteCustomer(this)'>Hapus</button></td>`;
-            });
-        }
-        
-        function deleteCustomer(button) {
-            button.parentElement.parentElement.remove();
-            saveCustomers();
-        }
-        
-        function editCustomer(button) {
-            let row = button.parentElement.parentElement;
-            let name = prompt("Edit Nama Customer", row.cells[0].innerText);
-            let date = prompt("Edit Tanggal", row.cells[1].innerText);
-            let amount = prompt("Edit Nominal", row.cells[2].innerText);
-            
-            if (name && amount) {
-                row.cells[0].innerText = name;
-                row.cells[1].innerText = date;
-                row.cells[2].innerText = amount;
-                saveCustomers();
-            }
-        }
+    
+        // Jika ingin akses hanya berlaku selama sesi, jangan gunakan `beforeunload`
     </script>
-    <script src="assets/js/index.js"></script>
+    
 </body>
 </html>

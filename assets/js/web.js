@@ -3,12 +3,19 @@ document.addEventListener("DOMContentLoaded", function() {
     const sidebar = document.getElementById("sidebar");
     const closeBtn = document.getElementById("close-btn");
 
+    // Pastikan sidebar selalu tertutup saat halaman dimuat
+    sidebar.style.width = "0";
+
     logo.addEventListener("click", function() {
-        sidebar.style.width = "250px";
+        if (sidebar.style.width === "250px") {
+            sidebar.style.width = "0"; // Tutup sidebar jika sudah terbuka
+        } else {
+            sidebar.style.width = "250px"; // Buka sidebar jika tertutup
+        }
     });
 
     closeBtn.addEventListener("click", function() {
-        sidebar.style.width = "0";
+        sidebar.style.width = "0"; // Tutup sidebar saat tombol "X" diklik
     });
 });
 
